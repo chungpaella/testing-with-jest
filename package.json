@@ -14,5 +14,8 @@
     "url": "git "
   },
   "author": "chungpaella",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "underscore": "^1.13.1"
+  }
 }
