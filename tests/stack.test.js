@@ -23,6 +23,6 @@ test ('pop on stack obeys by LIFO', () => {
     stack.push("second in");
     stack.push("last in");
     var firstOut = stack.pop(); //
-    expect(firstOut).toBe("first in");
+    expect(firstOut).toBe("last in");
 
 }); 

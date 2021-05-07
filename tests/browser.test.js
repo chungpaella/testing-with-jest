@@ -47,34 +47,36 @@ describe ('Clicking "Poppa Stacken!"', () => {
 describe ('Clicking "Vad finns överst på stacken?"', () => {
 	it ('should update the span text', async () => {
 		// Hämtar alla tre knappar från sidan.
-		let push = driver.findElement(By.id('push'));
-		let pop = driver.findElement(By.id('pop'));
-		let peek = driver.findElement(By.id('peek'));
+		let push = await driver.findElement(By.id('push'));
+		let pop = await driver.findElement(By.id('pop'));
+		let peek = await driver.findElement(By.id('peek'));
 
 		// Pushar 2 element till stacken.
-		push.click();
-		let alert = driver.switchTo().alert();
-		alert.sendKeys("1");
-		alert.accept();
+		await push.click();
+		let alert = await driver.switchTo().alert();
+		await alert.sendKeys("1");
+		await alert.accept();
 
-		push.click();
-		alert = driver.switchTo().alert();
-		alert.sendKeys("2");
-		alert.accept();
+		await push.click();
+		alert = await driver.switchTo().alert();
+		await alert.sendKeys("2");
+		await alert.accept();
 
 		// Kontrollerar span text innan pop.
-		let beforePop = driver.findElement(By.id('top_of_stack')).getText();
+		let beforePop = await driver.findElement(By.id('top_of_stack')).getText();
 		expect(beforePop).toBe("2");
-		pop.click();
+		await pop.click();
+		alert = await driver.switchTo().alert();
+		await alert.accept();
 
 		// Kontrollerar span text efter pop.
-		let afterPop = driver.findElement(By.id('top_of_stack')).getText();
+		let afterPop = await driver.findElement(By.id('top_of_stack')).getText();
 		expect(afterPop).toBe("2");
 
-		peek.click();
+		await peek.click();
 
 		// Kontrollerar att span text ändras. 
-		let stack = driver.findElement(By.id('top_of_stack')).getText();
+		let stack = await driver.findElement(By.id('top_of_stack')).getText();
 		expect(stack).toBe("1");
 	})
 });
