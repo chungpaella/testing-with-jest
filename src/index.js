@@ -10,7 +10,8 @@ window.onload = function () {
 
     pop.addEventListener("click", function() {
         var text = "Tog bort " + stack.pop();
-        alert(text);
+        console.log("text")
+        // alert(text);
     });
 
     push.addEventListener("click", function() {

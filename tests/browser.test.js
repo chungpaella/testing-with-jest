@@ -31,4 +31,50 @@ describe('Clicking "Pusha till stacken"', () => {
 		await alert.sendKeys("Bananer");
 		await alert.accept();
 	});
+
+});
+
+describe ('Clicking "Poppa Stacken!"', () => {
+	it ('should open alert box', async () => {
+		let pop = await driver.findElement(By.id('pop'));
+		await pop.click();
+		let alert = await driver.switchTo().alert();
+		await alert.accept();
+
+	})
+});
+
+describe ('Clicking "Vad finns överst på stacken?"', () => {
+	it ('should update the span text', async () => {
+		// Hämtar alla tre knappar från sidan.
+		let push = driver.findElement(By.id('push'));
+		let pop = driver.findElement(By.id('pop'));
+		let peek = driver.findElement(By.id('peek'));
+
+		// Pushar 2 element till stacken.
+		push.click();
+		let alert = driver.switchTo().alert();
+		alert.sendKeys("1");
+		alert.accept();
+
+		push.click();
+		alert = driver.switchTo().alert();
+		alert.sendKeys("2");
+		alert.accept();
+
+		// Kontrollerar span text innan pop.
+		let beforePop = driver.findElement(By.id('top_of_stack')).getText();
+		expect(beforePop).toBe("2");
+		pop.click();
+
+		// Kontrollerar span text efter pop.
+		let afterPop = driver.findElement(By.id('top_of_stack')).getText();
+		expect(afterPop).toBe("2");
+
+		peek.click();
+
+		// Kontrollerar att span text ändras. 
+		let stack = driver.findElement(By.id('top_of_stack')).getText();
+		expect(stack).toBe("1");
+	})
 });
